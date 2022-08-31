@@ -38,6 +38,7 @@ target 'MyLastStickers' do
     pod 'RNSVG', :path => '../node_modules/react-native-svg'
     pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
     pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+    pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
     pod 'RNGestureHandler', :podspec => '../node_modules/react-native-gesture-handler/RNGestureHandler.podspec'
     pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
