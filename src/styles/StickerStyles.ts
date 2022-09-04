@@ -1,5 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { COLORS } from '../assets/GlobalStyles';
+
+export const screenWidth = Dimensions.get('window').width;
+export const screenHeight = Dimensions.get('window').height;
 
 const StickerStyles = StyleSheet.create({
     logo: {
@@ -7,6 +10,16 @@ const StickerStyles = StyleSheet.create({
         height: 20,
         borderRadius: 100,
         marginRight: 10,
+    },
+
+    containerMessage: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: screenHeight / 2,
+    },
+
+    iconAward: {
+        marginBottom: 20,
     },
 
     containerTitle: {

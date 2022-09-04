@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import StickerProps from '../interfaces/StickerInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Award } from 'react-native-feather';
+import { COLORS } from '../assets/GlobalStyles';
 
 const NewStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerProps) => {
     const setData = async (initial: string, number: number) => {
@@ -31,7 +33,7 @@ const NewStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerP
 
     return (
         <View>
-            {allStickers.map((stickerGroup, index) => {
+            {allStickers.length > 0 ? allStickers.map((stickerGroup, index) => {
                 return (
                     <View key={index} style={{ marginVertical: 10 }}>
                         <View style={stickerStyle.containerTitle}>
@@ -44,7 +46,7 @@ const NewStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerP
                                     <Pressable
                                         onPress={() => setData(stickerGroup.initials, numberObject.number)}
                                         key={i}
-                                        style={({pressed}) => [{opacity: pressed ? 0.4 : 1}, numberObject.isGolden ? stickerStyle.containerGold : stickerStyle.containerWhite]}
+                                        style={({ pressed }) => [{ opacity: pressed ? 0.4 : 1 }, numberObject.isGolden ? stickerStyle.containerGold : stickerStyle.containerWhite]}
                                     >
                                         <Text style={numberObject.isGolden ? stickerStyle.numberGold : stickerStyle.numberWhite}>{numberObject.number}</Text>
                                     </Pressable>
@@ -53,7 +55,16 @@ const NewStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerP
                         </View>
                     </View>
                 )
-            })}
+            })
+                :
+                <View style={stickerStyle.containerMessage}>
+                    <Award width={80} height={80} style={stickerStyle.iconAward} color={COLORS.gold} />
+                    <View style={stickerStyle.containerTitle}>
+                        <Text style={[stickerStyle.numberWhite, { fontWeight: 'bold', fontSize: 18 }]}>Parabés! </Text>
+                        <Text style={stickerStyle.numberWhite}>Você completou o Album!</Text>
+                    </View>
+                </View>
+            }
         </View>
     )
 }
