@@ -3,7 +3,7 @@ import React from 'react';
 import { Image, Pressable, Text, View } from 'react-native';
 import StickerProps from '../interfaces/StickerInterface';
 
-const OldStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerProps) => {
+const OldStickers = ({ stickerStyle, allStickers, setChangeSomething, loading }: StickerProps) => {
     const setData1 = async (initial: string, number: number) => {
         try {
             var localStorage: any[] = [];

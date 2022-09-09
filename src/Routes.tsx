@@ -49,7 +49,8 @@ const BottomTabNavigator = () => {
                     borderTopRightRadius: 24,
                     borderTopLeftRadius: 24,
                     height: 60,
-                    backgroundColor: 'transparent',
+                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                    shadowColor: 'rgba(0, 0, 0, 0)',
                     borderTopWidth: 0,
                 },
                 tabBarIcon: ({ focused, color, size }) => {

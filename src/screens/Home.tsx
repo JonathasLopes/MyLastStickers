@@ -75,9 +75,6 @@ const Home = () => {
                 setAllMyStickers([]);
             }
 
-            if (changeSomething) {
-                setChangeSomething(false);
-            }
             setLoading(false);
         } catch (e) {
             setLoading(false);
@@ -88,6 +85,7 @@ const Home = () => {
     useEffect(() => {
         if (changeSomething) {
             getData();
+            setChangeSomething(false);
         }
     }, [changeSomething]);
 
@@ -106,9 +104,9 @@ const Home = () => {
                 <TopNavigationComponent setScreen={setScreen} screen={screen} />
                 <View style={{ marginHorizontal: 15 }}>
                     {screen === 'NewStickers' ?
-                        <NewStickers setChangeSomething={setChangeSomething} stickerStyle={StickerStyles} allStickers={Missing} />
+                        <NewStickers setChangeSomething={setChangeSomething} stickerStyle={StickerStyles} allStickers={Missing} loading={loading} />
                         :
-                        <OldStickers setChangeSomething={setChangeSomething} stickerStyle={StickerStyles} allStickers={AllMyStickers} />
+                        <OldStickers setChangeSomething={setChangeSomething} stickerStyle={StickerStyles} allStickers={AllMyStickers} loading={loading} />
                     }
                 </View>
             </View>

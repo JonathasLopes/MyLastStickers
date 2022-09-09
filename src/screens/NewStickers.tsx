@@ -10,11 +10,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Award } from 'react-native-feather';
 import { COLORS } from '../assets/GlobalStyles';
 
-const NewStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerProps) => {
-    const setData = async (initial: string, number: number) => {
+const NewStickers = ({ stickerStyle, allStickers, setChangeSomething, loading }: StickerProps) => {
+    const setData = async (initial: string, number: number, isGolden: boolean) => {
         try {
             var localStorage: any[] = [];
-            let val = { initials: initial, number: number };
+            let val = { initials: initial, number: number, isGolden: isGolden };
             await AsyncStorage.getItem('MyStickers').then((value) => {
                 if (value !== null) {
                     localStorage = JSON.parse(value);
@@ -33,7 +33,7 @@ const NewStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerP
 
     return (
         <View>
-            {allStickers.length > 0 ? allStickers.map((stickerGroup, index) => {
+            {allStickers.length > 0 && allStickers.map((stickerGroup, index) => {
                 return (
                     <View key={index} style={{ marginVertical: 10 }}>
                         <View style={stickerStyle.containerTitle}>
@@ -44,7 +44,7 @@ const NewStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerP
                             {stickerGroup.numbers.map((numberObject, i) => {
                                 return (
                                     <Pressable
-                                        onPress={() => setData(stickerGroup.initials, numberObject.number)}
+                                        onPress={() => setData(stickerGroup.initials, numberObject.number, numberObject.isGolden)}
                                         key={i}
                                         style={({ pressed }) => [{ opacity: pressed ? 0.4 : 1 }, numberObject.isGolden ? stickerStyle.containerGold : stickerStyle.containerWhite]}
                                     >
@@ -55,8 +55,9 @@ const NewStickers = ({ stickerStyle, allStickers, setChangeSomething }: StickerP
                         </View>
                     </View>
                 )
-            })
-                :
+            })}
+
+            {(!loading && allStickers.length == 0) &&
                 <View style={stickerStyle.containerMessage}>
                     <Award width={80} height={80} style={stickerStyle.iconAward} color={COLORS.gold} />
                     <View style={stickerStyle.containerTitle}>
