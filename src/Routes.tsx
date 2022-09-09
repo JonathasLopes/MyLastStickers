@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
-import { NavigationContainer, useScrollToTop } from '@react-navigation/native';
+import React from 'react';
+import { SafeAreaView, StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS } from './assets/GlobalStyles';
@@ -10,8 +10,6 @@ import Home from './screens/Home';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
-
-const ref = useRef(null);
 
 const MyTheme = {
     dark: false,
@@ -25,18 +23,13 @@ const MyTheme = {
     },
 };
 
-const goToTop = () => {
-    useScrollToTop(ref);
-}
-
 const HomeNavigator = () => {
     return (
         <HomeStack.Navigator initialRouteName={'Home'} detachInactiveScreens screenOptions={{ gestureEnabled: false }}>
-            <HomeStack.Screen 
-            listeners={() => ({tabPress: () => goToTop()})}
-            name="Home" 
-            component={Home} 
-            options={{ headerShown: false }} />
+            <HomeStack.Screen
+                name="Home"
+                component={Home}
+                options={{ headerShown: false }} />
         </HomeStack.Navigator>
     )
 }
@@ -75,16 +68,14 @@ const Routes = () => {
     return (
         <NavigationContainer theme={MyTheme}>
             <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background }}>
-                <ScrollView ref={ref}>
-                    <StatusBar barStyle="light-content" />
-                    <Stack.Navigator initialRouteName={'Home'} detachInactiveScreens screenOptions={{ gestureEnabled: false }}>
-                        <Stack.Screen
-                            name="Home"
-                            component={BottomTabNavigator}
-                            options={{ headerShown: false }}
-                        />
-                    </Stack.Navigator>
-                </ScrollView>
+                <StatusBar barStyle="light-content" />
+                <Stack.Navigator initialRouteName={'Home'} detachInactiveScreens screenOptions={{ gestureEnabled: false }}>
+                    <Stack.Screen
+                        name="Home"
+                        component={BottomTabNavigator}
+                        options={{ headerShown: false }}
+                    />
+                </Stack.Navigator>
             </SafeAreaView>
         </NavigationContainer>
     )

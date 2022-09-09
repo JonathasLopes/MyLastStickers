@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, ScrollView, View } from "react-native";
 import TopNavigationComponent from "../components/TopNavigatorComponent";
 import NewStickers from "./NewStickers";
 import OldStickers from "./OldStickers";
@@ -96,21 +96,23 @@ const Home = () => {
     }, []);
 
     return (
-        <View>
-            <Spinner
-                visible={loading}
-                textContent={'Carregando...'}
-                color={COLORS.white}
-            />
-            <TopNavigationComponent setScreen={setScreen} screen={screen} />
-            <View style={{ marginHorizontal: 15 }}>
-                {screen === 'NewStickers' ?
-                    <NewStickers setChangeSomething={setChangeSomething} stickerStyle={StickerStyles} allStickers={Missing} />
-                    :
-                    <OldStickers setChangeSomething={setChangeSomething} stickerStyle={StickerStyles} allStickers={AllMyStickers} />
-                }
+        <ScrollView>
+            <View>
+                <Spinner
+                    visible={loading}
+                    textContent={'Carregando...'}
+                    color={COLORS.white}
+                />
+                <TopNavigationComponent setScreen={setScreen} screen={screen} />
+                <View style={{ marginHorizontal: 15 }}>
+                    {screen === 'NewStickers' ?
+                        <NewStickers setChangeSomething={setChangeSomething} stickerStyle={StickerStyles} allStickers={Missing} />
+                        :
+                        <OldStickers setChangeSomething={setChangeSomething} stickerStyle={StickerStyles} allStickers={AllMyStickers} />
+                    }
+                </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
